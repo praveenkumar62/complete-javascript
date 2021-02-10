@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JavaScript - Object Oriented Programming</title>
+</head>
+<body>
+    <h1 style="text-align:center;">JavaScript - Object Oriented Programming</h1>
+
+    <h2>Intro</h2>
+    <h4>Not a programmming, its a paradigm / style</h4>
+    <p>This style is followed in lot of programming languages,</p>
+    <ul>
+        <li>C#</li>
+        <li>Java</li>
+        <li>JavaScript - Ex: Angular</li>
+    </ul>
+
+    <hr />
+
+    <h4>Procedural Programming & Object Oriented Programming</h4>
+    <strong>Procedural Programming</strong>
+    <ul>
+        <li><b>Basic way of programming</b> is what we followed from the schooling</li>
+        <li>It consist of few functions, which will be used for smaller level of works</li>
+    </ul>
+    <strong>OOP</strong>
+    <ul>
+        <li>OOP is for simplifying lots of functions and variables to build a application</li>
+        <li>Combining group of functions and variables in a unit, and calling this unit as object</li>
+        <li>Here we call variables as <strong>Property</strong> and functions as <strong>Methods</strong></li>
+    </ul>
+
+    <hr />
+
+    <h2>4 pillars of OOP concept</h2>
+    <h4>Encapsulation</h4>
+    <ul>
+        <li>Group related variables and functions in a object</li>
+        <li><strong>BENEFITS: Reduces complexity and improves reusability</strong></li>
+    </ul>
+    <p>Example</p>
+    <code>
+        <pre>
+            // Traditional Way
+            salary = 40000;
+            ot = 10;
+            rate = 100;
+            function calc(sal, ot, rate) {
+                return sal + ot * rate;
+            }
+
+            //OOPs
+            var emp = {                // Here variables & function stored in object, so called encapsulation
+                salary: 40000;
+                ot: 10;
+                rate: 100;
+                calc: function() {
+                    return this.sal + this.ot * this.rate;
+                }
+            }
+            emp.calc();
+        </pre>
+    </code>
+
+    <h4>Abstraction</h4>
+    <ul>
+        <li>In object, hiding some properties and methods from outside of object, to avoid some errors</li>
+        <li><strong>BENEFITS: Reduces the impact caused by changes done in future</strong></li>
+    </ul>
+    <p>
+        Example:<br />
+        In Code, changing inside the object like deleting method or rewriting property wont affect outside the object,
+        so it reduces the impact caused by code changes.
+    </p>
+
+    <h4>Inheritance</h4>
+    <ul>
+        <li>Allows us to reduce redudant code [repeating code]</li>
+        <li><strong>BENEFITS: Eliminates repeated code</strong></li>
+    </ul>
+    <p>
+        Example: <br />
+        If we want to add some properties and method [like click] for button tag, link tag, input tag, and others, 
+        define a common unit and inherit to that to use the functionality
+    </p>
+
+    <h4>Polymorphism - Poly means MANY, Morph means FORMS</h4>
+    <ul>
+        <li>Helps to reduce long If...else and Switch statements</li>
+        <li><strong>BENEFITS: Refactors ugly if..else/switch statements</strong></li>
+    </ul>
+
+    <hr />
+    <hr />
+
+    <h4>Factory Functions</h4>
+    <p>Example 1:</p>
+    <code>
+        <pre>
+            function factoryFunction(names, ages) {
+                return {
+                    name: names,
+                    age: ages,
+                    bio: function() {
+                        console.log('This is Bio');
+                    }
+                }
+            }
+            let emp1 = FactoryFunction('Praveen', 21);
+            emp1.bio();
+        </pre>
+    </code>
+
+    <hr />
+
+    <h4>Constructor</h4>
+    <p>Example 1:</p>
+    <code>
+        <pre>
+            function ConstructorFunction(names, ages) {
+                this.name = names,
+                this.age = ages,
+                this.bio = function() {
+                    console.log('This is Bio');
+                }
+            }
+            let emp2 = new ConstructorFunction('Praveen', 21);
+            // let emp2 = ConstructorFunction('Praveen', 21);    If we didn't use 'new', thn refers to the window obj, which can be gobally used.
+                                                                 WE SHOULD NOT DO THIS. 'new' will create an empty obj {}, and 'this' keyword
+                                                                 points to the current object, which called this function.
+        </pre>
+    </code>
+
+    <hr />
+    <hr />
+
+    <h2>Literals</h2>
+    <h4>Object, String, Boolean, </h4>
+    <p>Object literals - var obj = {}, var name = '', var num = 0, var condition = true <br />
+    This will converted to specific Constructor [new Object(), new String(), new Number(), new Boolean()] automatically</p>
+
+    <h2>Functions are Objects</h2>
+    <p>Example 1:</p>
+    <code>
+        <pre>
+            function Circle(names) {
+                this.name = names
+            }
+            // This Function is a Constructor which is an OBJECT, when checking in Console, it shows
+        </pre>
+        <img src="./images/FunctionsAreObjects1.png" height="50" width="auto" />
+    </code>
+
+    <p>Example 2 - 1:</p>
+    <code>
+        <pre>
+            var person = {
+                fullName: function() {
+                  return this.firstName + " " + this.lastName;
+                }
+            }
+            var person1 = {
+                firstName:"John",
+                lastName: "Doe"
+            }
+            var person2 = {
+                firstName:"Mary",
+                lastName: "Doe"
+            }
+            person.fullName.call(person1); // Will return "John Doe"
+            // Person1 is a separate Obj which is used on Function Obj for giving the result
+        </pre>
+    </code>
+    <p>Example 2 - 2:</p>
+    <code>
+        <pre>
+            var person = {
+                fullName: function() {
+                  return this.firstName + " " + this.lastName;
+                }
+            }
+                var person1 = {
+                firstName:"John",
+                lastName: "Doe"
+            }
+                var person2 = {
+                firstName:"Mary",
+                lastName: "Doe"
+            }
+            person.fullName.call(person1); // Will return "John Doe"
+            // Person1 is a separate Obj which is used on Function Obj for giving the result
+        </pre>
+    </code>
+
+    <hr />
+    <hr />
+
+    <h2>Important to know about Values and References</h2>
+    <p>In Primitive Data types, variables are copied by value</p>
+    <ul>
+        <li>String</li>
+        <li>Number</li>
+        <li>Boolean</li>
+        <li>Symbol</li>
+        <li>Undefined</li>
+        <li>Null</li>
+    </ul>
+    <p>In Non-Primitive Data types, variables are copied by the reference</p>
+    <ul>
+        <li>Object</li>
+        <li>Function</li>
+        <li>Arrays</li>
+    </ul>
+
+    <hr />
+
+    <h4>Copying by Value</h4>
+    <p>Example 1:</p>
+    <code>
+        <pre>
+            var x = 10;
+            var y = x;
+            x = 20;
+            // x has 20
+            // y has 10
+        </pre>
+    </code>
+    <p>Example 2:</p>
+    <code>
+        <pre>
+            var x = 10;
+            function calling(n) {
+                n++;
+            }
+            calling(x);
+            // now result of x is 10 still
+            //This is because value 10 is stored inside a function, and not on x.
+        </pre>
+    </code>
+    <p>This above variable copies by value</p>
+
+    <hr />
+
+    <h4>Copying by Reference</h4>
+    <p>Example 1:</p>
+    <code>
+        <pre>
+            var x = {val: 10};
+            var y = x;
+            x.val = 20;
+            // x has {val: 20}
+            // y has {val: 20}
+            //This is because value is copied by reference [It points the memory not the value, so value gets changed]
+        </pre>
+    </code>
+    <p>Example 2:</p>
+    <code>
+        <pre>
+            var x = {val: 10};
+            function calling(n) {
+                value.n++;
+            }
+            calling(x);
+            // result of x is {val: 10} before function call
+            // now result of x is{val: 11} after function call
+        </pre>
+    </code>
+
+    <hr />
+    <hr />
+
+    <h2>Adding / Updating properties in Object</h2>
+    <p>In real-time scenario. sometimes, we need to add / remove the password [property] for user accounts received from the server</p>
+
+    <p>Example: 1 - [METHOD - 1] - NORMAL WAY</p>
+    <code>
+        <pre>
+            var test1 = {
+                name: "Kelvin";
+            }
+            test1.address = {   // Ways to add / update
+                city: "Bengaluru",
+                country: 'India'
+            };        
+            // { name: 'Kelvin', address: { city: 'Bengaluru', country: 'India'}}
+        </pre>
+    </code>
+
+    <p>Example: 1 - [METHOD - 2]</p>
+    <h4>ADD OR UPDATE PROPERTY</h4>
+    <code>
+        <pre>
+            var test2 = {
+                name: "Kel";
+            }
+            <b>test2['address'] = { city: "Bengaluru", country: 'India'};</b>
+            // { name: 'Kelvin', address: { city: 'Bengaluru', country: 'India'}}
+        </pre>
+    </code>
+    <hr />
+    <h4>SELECTING PROPERTY using variable containing dynamic data</h4>
+    <code>
+        <pre>
+            var test3 = {
+                name: "Kel";
+                'address': "bangalore"  
+            }
+            <b>const dynamicData = 'address';
+            test3[dynamicData];     // This cant be achieved by using 'test3.dynamicData'</b> 
+            // { name: 'Kelvin', address: 'bangalore' }
+        </pre>
+    </code>
+    <h4>If Property has '-' or ' ', LIKE this 'address-list' or 'address list' wont WORK on NORMAL WAY</h4>
+    <code>
+        <pre>
+            var test4 = {
+                name: "Kel";
+                'address-list': "bangalore"     // PROPERTY with SPACE or - must enclosed with QUOTES
+            }
+            <b>const dynamicData = 'address-list';  // OR   const dynamicData = 'address list';
+            test4[dynamicData];   // This cant be achieved by using 'test4.dynamicData'</b> 
+            // { name: 'Kel', address: 'bangalore'}
+        </pre>
+    </code>
+
+    <hr />
+    
+    <h2>Deleting properties in Object</h2>
+    <p>In real-time scenario. sometimes, we need to delete the old password [property] for user accounts received from the server</p>
+
+    <p>Example: 1 - [METHOD - 1]</p>
+    <h4>DELETE PROPERTY</h4>
+    <code>
+        <pre>
+            var test5 = {
+                name: "Kelvin";
+                city: "Bengaluru",
+                country: 'India'
+            }      
+            delete test5.country;
+            // { name: 'Kelvin', city: 'Bengaluru' }
+        </pre>
+    </code>
+
+    <p>[METHOD - 2]</p>
+    <h4>DELETE PROPERTY using variable received dynamically</h4>
+    <code>
+        <pre>
+            var test6 = {
+                name: "Kelvin";
+                city: "Bengaluru",
+                country: 'India'
+            }      
+            let dynamicData2 = 'country';
+            delete test6[dynamicData2];
+            // { name: 'Kelvin', city: 'Bengaluru' }
+        </pre>
+    </code>
+
+    <hr />
+    <hr />
+
+    <h2>Iterate inside Objects [METHOD - 1 - For in Loop] - BEST when using to enumerate properties, methods, values</h2>
+    <p>Iterating inside objects gives properties & methods and values also</p>
+    <h4>Iterating properties and methods</h4>
+    <code>
+        <pre>
+            var objIterate = {
+                name: "Praveen",
+                age: 22,
+                city: "Bangalore",
+                country: "India",
+                store: funcion() {
+                    console.log('storing...');
+                }
+            }
+            for (let items in objIterate) {
+                console.log('Count: ', items);   // Iterates properties and methods
+            }
+            // Output:
+            // Count: name
+            // Count: age
+            // Count: city
+            // Count: country
+            // Count: store
+        </pre>
+    </code>
+    <h4>Iterating both properties & methods and values</h4>
+    <code>
+        <pre>
+            var objIterate = {
+                name: "Praveen",
+                age: 22,
+                city: "Bangalore",
+                country: "India",
+                store: funcion() {
+                    console.log('storing...');
+                }
+            }
+            for (let items in objIterate) {
+                console.log('Property is: ', items, ' & Value is: ', objIterate[items]);   // Iterates properties and methods
+            }
+            // Output:
+            // Property is: name & Value is Praveen
+            // Property is: age & Value is 22
+            // Property is: city & Value is Bangalore
+            // Property is: country & Value is India
+            // Property is: store & Value is  ƒ () {
+            //    console.log('storing...');
+            // }
+        </pre>
+    </code>
+    <h4>Iterating only properties not methods</h4>
+    <code>
+        <pre>
+            var objIterate = {
+                name: "Praveen",
+                age: 22,
+                city: "Bangalore",
+                country: "India",
+                store: funcion() {
+                    console.log('storing...');
+                }
+            }
+            for (let items in objIterate) {
+                if(typeof objIterate[item] !== 'function') {
+                    console.log('Property is: ', items);   // Iterates properties only
+                }
+            }
+            // Output:
+            // Property is: name
+            // Property is: age
+            // Property is: city
+            // Property is: country
+        </pre>
+    </code>
+
+    <h2>Iterate inside Objects [METHOD - 2 - Object.keys()] - BEST when using to enumerate properties & methods only in ARRAYS</h2>
+    <p>Iterating inside objects gives properties & methods. Cannot separate properties and values</p>
+    <h4>Iterating properties and methods</h4>
+    <code>
+        <pre>
+            var objIterate = {
+                name: "Praveen",
+                age: 22,
+                city: "Bangalore",
+                country: "India",
+                store: funcion() {
+                    console.log('storing...');
+                }
+            }
+            const objArrays = Object.keys(objIterate);
+            console.log(objArrays);
+            // Output:
+            // ["name", "age", "city", "country", "store"]
+        </pre>
+    </code>
+    <h4>Checking specific property EXIST or NOT in Object</h4>
+    <code>
+        <pre>
+            var objIterate = {
+                name: "Praveen",
+                age: 22,
+                city: "Bangalore",
+                country: "India",
+                store: funcion() {
+                    console.log('storing...');
+                }
+            }
+            if('name' in objIterate) {
+                console.log('name property exists');
+            }
+            // Output:
+            // ["name", "age", "city", "country", "store"]
+        </pre>
+    </code>
+
+    <hr />
+    <hr />
+
+    <h2>Abstraction</h2>
+    <p>Consider, in object we need to hide password property from users as it is not needed everytime, if not hided
+        there is a chance that user may update or delete that property which leds to issue, so hiding it
+    </p>
+
+    <h4>Example for ABSTRACTION - Only for understanding purpose</h4>
+    <code>
+        <pre>
+        function ObjAbstract(name, country) {
+            this.name = name,
+            this.country = country,
+            this.company = "CodeX",
+            this.officialData = function() {
+                console.log('Recording the data');
+            }
+            this.store = funcion() {
+                this.officialData();
+                console.log('storing it...');
+            }
+        }
+        var objAbs = new ObjAbstract("Praveen", "India");
+        objAbs.store();
+        </pre>
+    </code>
+    <p>SCENARIO 1: The company property is constant for all employee. So, now we need to hide <b>this.company</b> from accessing it</p>
+    <code>
+        <pre>
+        objAbs.company = "Google";
+        // Now object got changed, since anyone can access it
+        </pre>
+    </code>
+    <p>SCENARIO 2: Need to execute <b>officialData</b> method only after calling <b>store</b> method. not straightly
+        So, now we need to hide <b>this.officialData</b> from accessing it outside from others
+    </p>
+    <code>
+        <pre>
+        objAbs.officialData();
+        // Now this method is called before the storing method, so this causes error somewhere in functionality
+        </pre>
+    </code>
+
+    <hr />
+
+    <h4>Private Properties and Methods for Abstraction</h4>
+    <p>SCOPE</p>
+    <ul>
+        <li>will die once the function is executed</li>
+    </ul>
+    <p>CLOSURE</p>
+    <ul>
+        <li>It will not die after the function execution, since it is stored in memory</li>
+        <li>It is a combination of functions bundled together with references</li>
+        <li>Closure gives you access to an outer function’s scope from an inner function</p></li>
+        <li>In JavaScript, closures are created every time a function is created, at function creation time.</li>
+    </ul>
+    <code>
+        <pre>
+            function ObjAbstractTest(name, country) {
+                this.name = name,
+                this.country = country,
+                let company = "CodeX",  // This is a variable,  NOT PROPERTY
+                // This scope dies after executing function and recreates when calling
+                let officialData = function() {
+                    console.log('Recording the data');
+                }
+                this.store = funcion() {
+                    let test = 'test';   // It is a local variable SCOPE [Dies after this function executes] inside this function
+                    officialData();   // This is closure of store function [When this.store function executed, variables [officialData()] 
+                    will get stored in memory even after execution] 
+                    console.log('storing it...');
+                }
+            }
+            var objAbs1 = new ObjAbstractTest('CP', 'In');
+            objAbs1.company // ERROR [not accessible]
+            objAbs1.officialData(); // ERROR [not accessible]
+            objAbs1.store(); // Now officialData() also got executed
+        </pre>
+    </code>
+
+    <hr />
+
+    <h4>Accessing private properties from outside of constructor [READ ONLY] - METHOD 1</h4>
+    <p>Private properties can be accessed from outside by using this technique, but it is read only</p>
+    <code>
+        <pre>
+            function ObjAbstractTest2(name, country) {
+                this.name = name,
+                this.country = country,
+                let company = "CodeX",
+                let officialData = function() {
+                    console.log('Recording the data');
+                }
+                this.sharePrivate = function() {
+                    return company;   // Now PRIVATE PROPERTY can be accessed by calling this
+                }
+                this.store = funcion() {   // This is Closure
+                    officialData(); 
+                    console.log('storing it...');
+                }
+            }
+            var objAbs2 = new ObjAbstractTest2('CP', 'In');
+            objAbs2.sharePrivate();   // returns CodeX
+        </pre>
+    </code>
+
+    <h4>Accessing private properties from outside [defineProperty/defineProperties] - METHOD 2</h4>
+    <b>* In constructor, use getters & setters inside defineProperty to get & set *</b>
+    <p>For reading only or writing - use defineProperty & for both use defineProperties</p>
+    <b>get - Getter is to get the property & set - setter is to set the property</b>
+    <h2>Object.defineProperty</h2>
+    <code>
+        <pre>
+            function ObjAbstractTest2(name, country) {
+                this.name = name,
+                this.country = country,
+                let company = "CodeX",
+                let officialData = function() {
+                    console.log('Recording the data');
+                }
+                Object.defineProperty(this, 'company', {
+                    get: function() {
+                        return company;
+                        // THIS IS CLOSURE SO CAN ACCESS "COMPANY"
+                    }
+                })    
+                // 1st arg = points to which object it applies
+                // 2nd arg = name for this
+                // 3rd arg = key value pair [get/set as key & function as value]
+                this.store = funcion() {   // This is Closure
+                    officialData(); 
+                    console.log('storing it...');
+                }
+            }
+            var objAbs2 = new ObjAbstractTest2('CP', 'In');
+            objAbs2.sharePrivate();   // returns CodeX
+        </pre>
+    </code>
+    <h2>Object.defineProperties</h2>
+    <code>
+        <pre>
+            function ObjAbstractTest2(name, country) {
+                this.name = name,
+                this.country = country,
+                let company = "CodeX",
+                let officialData = function() {
+                    console.log('Recording the data');
+                }
+                Object.defineProperty(this, 'company', {
+                    get: function() {
+                        return company;
+                        // THIS IS CLOSURE SO CAN ACCESS "COMPANY"
+                    },
+                    set: function(value) {
+                        company = value;
+                    }
+                })    
+                // 1st arg = points to which object it applies
+                // 2nd arg = name for this
+                // 3rd arg = key value pair [get/set as key & function as value]
+                this.store = funcion() {   // This is Closure
+                    officialData(); 
+                    console.log('storing it...');
+                }
+            }
+            var objAbs2 = new ObjAbstractTest2('CP', 'In');
+            objAbs2.sharePrivate();   // returns CodeX
+        </pre>
+    </code>
+
+    <hr />
+    <hr />
+
+    <h2>Template literals - accessing the properties</h2>
+    <h4>Cons</h4>
+    <h5>It is read only & we cant define like this - tempLiteral.fullData = 'Kumar'</h5>
+    <h5>Can't make function look like a Property</h5>
+    <h5>SOLN - Try Getters & Setters</h5>
+    <code>
+        <pre>
+            var tempLiteral = {
+                name: 'Praveen',
+                age: 23,
+                fullData: function() {
+                    return `${this.name} - ${this.age}`;
+                }
+            }
+            console.log(tempLiteral.fullData());
+        </pre>
+    </code>
+    <hr />
+    <hr />
+
+    <h2>Getters and Setters [Used for access to private property]</h2>
+    <p>Getters and setters are normally used to provide access to private members</p>
+    <h4>Pros</h4>
+    <h5>Same name given for setter and getter to get and set it, doesnt need to use different names</h5>
+    <h5>Instead of using paranthesis(), we can call without using that</h5>
+    <h5>Code looks fine, when we implement like this - [ obj1.seconds + 1 ]</h5>
+    <code>
+        <pre>
+            var tempLit = {
+                name: 'Praveen',
+                age: 23,
+                get fullData() {                                // Get the value
+                    return `${this.name} - ${this.age}`;
+                },
+                set fullData(value) {                           // Set the value
+                    var vals = value.split(" ");
+                    this.name = vals[0];
+                    this.age = vals[1];
+                }
+            }
+            console.log(tempLit.fullData);                      // Get the value
+            tempLit.fullData = 'PK 22';                         // Set the value
+        </pre>
+    </code>
+
+    <hr />
+    <hr />
+
+    <h1>Worked out exercises at last - INSPECT CODE</h1>
+    <h3>1. Stopwatch using normal function</h3>
+    <h3>2. Stopwatch using Objects</h3>
+
+    <hr />
+    <hr />
+
+    <h2>Prototypical Inheritance</h2>
+    <p>Inheritance - It enables an object to access[copy] the properties and methods of another object</p>
+    <p>Pros: It improves the reusability of code</p>
+    <h3>Classical vs Prototypical Inheritance</h3>
+    <p><b>Classical</b> - Usually seen in C++, Java</p>
+    <p><b>Prototypical</b> - Usually seen in JavaScript</p>
+
+    <h3>Prototypical Inheritance</h3>
+    <p>Having a common object [assume we name as objBase], where it has common properties and methods [called as PROTOTYPE / PARENT], 
+        that can be used by any other objects</p>
+    <strong>When we look for a property/method in an object, it will search for that on the same object, if not 
+        available, it will look into the prototype
+    </strong>
+
+    <h3>Basic Example for UNDERSTANDING</h3>
+    <p>Lets, create two empty objects X and Y, and checking in console by expanding it,
+        we can see _proto_ method, in which _proto_:Object[0] (:Object[0] - means its an Object prototype) is a common method, accessed by all the
+        objects.
+        In simpler words, 
+        for Object - common methods like toString(), valueOf(),.. will be stored in _proto_ and can be accessed at anytime.
+        for Arrays - commons methods like length, push(), pop(), splice(), slice(), indexOf(),..
+    </p>
+    <p>Only for checking the prototype of below objects are same</p>
+    <code>
+        <pre>
+            var objX = {};
+            var objY = {};
+            console.log(Object.getPrototypeOf(objX) === Object.getPrototypeOf(objY));
+        </pre>
+    </code>
+    <h3>NOTE: Every object has a Prototype / Parent except Root object [Root object is explained on next one]</h3>
+
+    <hr />
+
+    <h2>Multi-level Inheritance</h2>
+    <h3>Basic Example for UNDERSTANDING</h3>
+    <p>Previously, we have seen object X and Y has a _proto_:Object[0], which we call as objBase, that provides properties and methods
+        to object X and Y.
+    </p>
+    <p>Similiarly, for Arrays, when we check it, we get first _proto_:Array[0], and it says this prototype is of Arrays and provides
+        us properties and methods related to Arrays.
+        <br />
+        In same, we can see _proto_:Object[0] when we scrolling down, which is a prototype of Object & this is known as [Root Object],
+        so we can use that object prototype also.
+        like : Empty Array created -> Base / Parent [Array] -> Root Obj [Object]
+    </p>
+
+    <h3>Live Example</h3>
+    <code>
+        <pre>
+            function Circle(radius) {
+                this.rad = radius;
+                this.draw = function() {
+                    console.log('drawing circle');
+                }
+            }
+            var circle = new Circle(10);
+        </pre>
+    </code>
+    <p>When we create an Object 'circle' and check the prototype, its prototype is from constructors prototype
+         (i.e) when i create constructor for Object type, then the variable 'circle' has prototype of Object at first [Parent / Base],
+         then scrolling down, we can see the second prototype [Root Object].
+         like : circle Obj -> Base / Parent [Circle Constructor] -> Root Obj [Object]
+    </p>
+    <h4>NOTE: Objects/Arrays created by given constructor will have same prototype</h4>
+    <p>This is MULTI LEVEL INHERITANCE</p>
+
+    <hr />
+    <hr />
+
+    <h2>Property Descriptors</h2>
+    <p>These makes Objects more simple like configure, writeable, enumerable</p>
+
+    <code>
+        <pre>
+            let person = { name: 'CP' };
+            
+            Object.defineProperty(person, 'name', {
+                writable: true,       // Wont allow person.name to be changed / updated
+                configurable: true,   // Wont allow person.name to be removed / deleted
+                enumerable: true      // Wont show the value, when we check 'person'
+            });
+        </pre>
+    </code>
+
+    <hr />
+    <hr />
+
+    <h2>Prototype Vs Instance Members - Defining common method/property inside a Prototype</h2>
+    <h4>Example - Scenario basis</h4>
+    <code>
+        <pre>
+            function Members(name) {
+                // These are called Instance Members
+                this.name = name;
+                this.draw = function() {
+                    console.log('drawing...');
+                }
+            }
+            const m1 = new Members('CP');
+            const m2 = new Members('PK');
+            .
+            .
+            .
+        </pre>
+    </code>
+    <strong>In this Scenario, when we try to create 10000 objects using the Constructor 'Members', 10000 draw methods also
+        will be created, which will occupy lot of memory.
+        <br />
+        <br />
+        Since, draw method is going to be common for all objects, for this we going to create draw method inside the 
+        PROTOTYPE of Constructor 'Members', so this method is created for all objects inside the PROTOTYPE to access that.
+    </strong>
+    <code>
+        <pre>
+            function Members(name) {
+                // These are called Instance Members
+                this.name = name;
+                this.move = function() {
+                    console.log('moving...');
+                }
+            }
+            Members.prototype.draw = function() {
+                // These are called Prototype Members
+                console.log('drawing...');
+
+                this.move();   // WE CAN ALSO CALL THE PROPERTY / METHOD WHICH IS DEFINED INSIDE THE CONSTRUCTOR
+            }
+            const m1 = new Members('CP');
+        </pre>
+    </code>
+    <strong>Since, we created draw method inside the PROTOTYPE, we can access this method only when we accessed the Constructor 'Members' 
+        or the Objects created using the Constructor. It wont be available under PROTOTYPE of other Constructors or Objects or Arrays.
+    </strong>
+    <br />
+    <strong>NOTE: Prototype of Constructor will be available same for the Objects which are created using the Constructor</strong>
+
+    <hr />
+
+    <h4>Changing / Updating existing functionality methods</h4>
+    <h5>Example - Changing splice(), slice(), join(),..</h5>
+    <code>
+        <pre>
+            function Members(name) {
+                // These are called Instance Members
+                this.name = name;
+                this.move = function() {
+                    console.log('moving...');
+                }
+            }
+            Members.prototype.draw = function() {
+                // These are called Prototype Members
+                console.log('drawing...');
+
+                this.move();   // WE CAN ALSO CALL THE PROPERTY / METHOD WHICH IS DEFINED INSIDE THE CONSTRUCTOR
+            }
+            Members.prototype.toString = function() {
+                return 'Updated one with the ' + this.name
+            }
+            const m1 = new Members('CP');
+        </pre>
+    </code>
+
+    <hr />
+
+    <h4>Calling the newly added method in Prototype from Constructor</h4>
+    <code>
+        <pre>
+            function Members(name) {
+                // These are called Instance Members
+                this.name = name;
+                this.draw();    // WE CAN CALL THE METHOD DEFINED INSIDE THE PROTOTYPE IN CONSTRUCTOR
+            }
+            Members.prototype.draw = function() {
+                // These are called Prototype Members
+                console.log('drawing...');
+            }
+            const m1 = new Members('CP');
+        </pre>
+    </code>
+
+    <hr />
+    <hr />
+
+    <h2>Iterating through Properties - for Intance members & Prototype members</h2>
+    <code>
+        <pre>
+            function Iterateprops(name) {
+                this.name = name;
+                this.draw = function() {
+                    console.log('Drawing...');
+                }
+            }
+            Iterateprops.prototype.move = function() {
+                console.log('Moving on...');
+            }
+            var iterObj1 = new Iterateprops('CP');
+
+            // Iterating through properties only on INSTANCE MEMBERS
+            console.log(Object.keys(iterObj1));     //  ['name', 'draw']
+
+            // Iterating through properties on both INSTANCE MEMBERS & PROTOTYPE MEMBERS
+            for (let items in iterObj1) {
+                console.log(items)      //  name draw move
+            }
+        </pre>
+    </code>
+
+    <hr />
+
+    <h4>Checking whether Specific Property/Method is from Constructor or Prototype</h4>
+    <code>
+        <pre>
+            function Iterateprops1(name) {
+                this.name = name;
+                this.draw = function() {
+                    console.log('Drawing...');
+                }
+            }
+            Iterateprops1.prototype.move = function() {
+                console.log('Moving on...');
+            }
+            var iterObj2 = new Iterateprops1('CP');
+
+            console.log(iterObj2.hasOwnProperty('move'));       // false
+        </pre>
+    </code>
+
+    <hr />
+
+    <h2>NOTE: NEVER MODIFY THE METHODS IN A PROTOTYPE, which sometimes causes error when using library or something else</h2>
+
+    <hr />
+    <hr />
+
+    <h2>Creating a own Prototypical Inheritance</h2>
+    <h4>Example for UNDERSTANDING</h4>
+    <p>Consider, We need to create a prototype for coloring the Shapes, like circle, square, etc. So,
+        we are creating a new Objects and adding a prototype for each Objects [circle, square, etc]. 
+        TO PREVENT REPEATED SAME PROTOTYPE, We going to create a new Prototype for Object SHAPE, and other Object
+        inherits from it.
+    </p>
+
+    <h4>Example</h4>
+    <code>
+        <pre>
+            // Common Prototype to get inherited
+            function Shape() {
+            }
+            Shape.prototype.color = function() {
+                console.log('coloring');
+            }
+
+            function Circle(name) {
+                this.name = name;
+            }
+            // Circle.prototype = Object.create(Object.prototype); -> this is default. By this way, Circle is accessing root obj
+            Circle.prototype = Object.create(Shape.prototype);
+
+            function Square(name) {
+                this.name = name;
+            }
+            Circle.prototype = Object.create(Shape.prototype);
+            const sh = new Shape();
+            const c = new Circle('CP');
+            const s = new Square('PK');
+        </pre>
+    </code>
+
+    <hr />
+
+    <h2>After inheriting Prototype, Resetting the Constructor [Mandatory]</h2>
+    <p>Consider, We need to create the objects dynamically using &lt;Constructor&gt;.prototype.constructor,
+        but after we inherited common Prototype into this constructor,this gets changed. so to prevent it we
+        need to reset it.
+    </p>
+    <code>
+        <pre>
+            function Shape() {}
+            Shape.prototype.draw = function() {
+                console.log('draw');
+            }
+            function Rest(n) {
+                this.name = n;
+            }
+
+            // Another way of creating the Object - executed successfully now
+            var r = new Rest.prototype.contructor('CP');
+
+            // Now inheriting the new constructor to the Shape constructor
+            Rest.prototype = Object.create(Shape.prototype);
+
+            // After this when we try to create the new Object using constructor, it will show only empty Obj with SHAPE,
+            // This is becoz we changed the prototype for the constructor - Rest.prototype = Object.create(Shape.prototype);
+            // So need to reset the constructor
+            
+            Rest.prototype.constructor = Rest;
+
+            // Now we can create the Object using this new type for creation of Object
+            var rr = new Rest.prototype.contructor('PK');
+        </pre>
+    </code>
+
+    <strong>NOTE: AFTER INHERITING THE CONSTRUCTOR, NEVER FORGOT TO RESET THE PROTOTYPE AS A BEST PRACTICE</strong>
+
+    <hr />
+    <hr />
+
+    <h2>Calling the Super Constructor</h2>
+    <p>This is helpful if what to initialize the property / method at the time of Object creation.
+        Normally, when we inherit the Shape constructor into Cirle constructor and created the Object,
+        we can see only properties / methods of Circle constructor first, then common prototypes properties / 
+        methods under _proto_, so we need to bring it near the Circle constructor by initializing.
+    </p>
+    <strong>Now, we are going to keep common color for all CONSTRUCTOR which inherits SHAPE</strong>
+    <code>
+        <pre>
+            function Shape(color) {
+                this.color = color; 
+            }
+            Shape.prototype.draw = function() {
+                console.log('drawing...');
+            }
+
+            function Spr(name, clr) {
+                this.name = name;
+
+                // Now we are making a call to the Shape constructor
+                Shape.call(this, clr);
+            }
+
+            var sp = new Spr('PK', 'red');
+            console.log(sp);        // { name: 'PK', color: 'red' }
+        </pre>
+    </code>
+
+    <hr />
+    <hr />
+
+    <h2>Reducing lines of code on Prototype Inheritance</h2>
+    <p>In few previous examples, we can see that we are inheriting SHAPE constructor on other object constructors
+        like Circle Constructor and Square Constructor and it may continue for more... like below
+    </p>
+    <code>
+        <pre>
+            function Shape() {
+            }
+            Shape.prototype.draw = function() {
+                console.log('drawing...');
+            }
+
+            function Circle(n) {
+                this.name = n;
+            }
+            Circle.prototype = Object.create(Shape.prototype);   // This two lines can be combined in one function
+            Circle.prototype.constructor = Circle;               // for reusability purpose
+            
+            function Square(n) {
+                this.name = n;
+            }
+            Square.prototype = Object.create(Shape.prototype);   // This two lines can be combined in one function
+            Square.prototype.constructor = Square;               // for reusability purpose
+        </pre>
+    </code>
+    <h4>Working Example with resusability</h4>
+    <code>
+        <pre>
+            function Shape() {
+            }
+            Shape.prototype.draw = function() {
+                console.log('drawing...');
+            }
+
+            // THIS FUNCTION CAN BE REUSED EVERYTIME WHEN WE PERFORM PROTOTYPE INHERITANCE
+            // This is called Intermediate Function Inheritance
+            function reuseExtend(Child, Parent) {
+                Child.prototype = Object.create(Parent.prototype);   
+                Child.prototype.constructor = Child;   
+            }
+
+            function Circle(n) {
+                this.name = n;
+            }
+            reuseExtend(Circle, Shape);         // IMPLEMENT LIKE THIS    
+            
+            function Square(n) {
+                this.name = n;
+            }
+            reuseExtend(Square, Shape);         // IMPLEMENT LIKE THIS
+
+            var c = new Circle('PK');
+            var s = new Square('CP');
+        </pre>
+    </code>
+
+    <hr />
+    <hr />
+
+    <h2>Method Overriding</h2>
+    <p>When an method from a Prototype needs to be overrided by other method</p>
+    <p>Example - We have a common Prototype defined by Shape Constructor having method - draw() 
+        that gets inherited by Other Constructors, like Circle, Square, etc. In certain cases, some Constructors
+        like Square doesn't want to implement draw() / change the functionality of draw(), then this 
+        Method Overriding is used. 
+        SOLUTION - Reimplementing after the Common prototype implemented
+    </p>
+    <h4>Example - 1 - Only reimplementing the method</h4>
+    <code>
+        <pre>
+            function Shape() {
+            }
+            Shape.prototype.draw = function() {
+                console.log('drawing...');
+            }
+
+            function reuseExtend(Child, Parent) {
+                Child.prototype = Object.create(Parent.prototype);   
+                Child.prototype.constructor = Child;   
+            }
+
+            function Circle(n) {
+                this.name = n;
+            }
+            reuseExtend(Circle, Shape);
+            
+            function Square(n) {
+                this.name = n;
+            }
+            reuseExtend(Square, Shape);
+            
+            // WANT TO CHANGE THE DRAW() ONLY FOR SQUARE
+            Square.prototype.draw = function() {
+                console.log('drawing this only for square using Method Overriding...');
+            }
+
+            var c = new Circle('PK');
+            var s = new Square('CP');
+        </pre>
+    </code>
+    <h4>Example - 2 - Reimplementing the method and calling the common method also</h4>
+    <code>
+        <pre>
+            function Shape() {
+            }
+            Shape.prototype.draw = function() {
+                console.log('drawing...');
+            }
+
+            function reuseExtend(Child, Parent) {
+                Child.prototype = Object.create(Parent.prototype);   
+                Child.prototype.constructor = Child;   
+            }
+
+            function Circle(n) {
+                this.name = n;
+            }
+            reuseExtend(Circle, Shape);
+            
+            function Square(n) {
+                this.name = n;
+            }
+            reuseExtend(Square, Shape);
+            
+            // WANT TO CHANGE THE DRAW() ONLY FOR SQUARE
+            Square.prototype.draw = function() {
+                // If we are not calling the Common method using 'this'
+                Shape.prototype.draw();
+
+                // If we use 'this' for the Common method, then need to use call() for setting the context
+                Shape.prototype.draw.call(this);
+
+                console.log('drawing this only for square using Method Overriding...');
+            }
+
+            var c = new Circle('PK');
+            var s = new Square('CP');
+        </pre>
+    </code>
+
+    <h2>Polymorphism</h2>
+    <p>Poly - Many, Morph - Forms</p>
+    <p>Implementing in different forms</p>
+    <strong>Previous concept is an also an best example for Polymorphism</strong>
+    <h4>Polymorphism is so powerful, as when we re-implemented this, still this will be called</h4>
+    <p>Example - If we create Objects using Arrays still we achieve new implementation</p>
+    <code>
+        <pre>
+            function Shape() {
+            }
+            Shape.prototype.draw = function() {
+                console.log('drawing...');
+            }
+
+            function reuseExtend(Child, Parent) {
+                Child.prototype = Object.create(Parent.prototype);   
+                Child.prototype.constructor = Child;   
+            }
+
+            function Circle(n) {
+                this.name = n;
+            }
+            reuseExtend(Circle, Shape);
+            
+            function Square(n) {
+                this.name = n;
+            }
+            reuseExtend(Square, Shape);
+            Square.prototype.draw = function() {
+                console.log('drawing this only for square...');
+            }
+
+            function Recte(n) {
+                this.name = n;
+            }
+            reuseExtend(Rect, Shape);
+            Rect.prototype.draw = function() {
+                console.log('drawing this only for rectangle...');
+            }
+
+            // If we use call these using Arrays dynamically, still we call the reimplemented method
+            let arrs = [
+                // Just calling Constructor only
+                new Square(),
+                new Rect()
+            ];
+            for (let items of arrs) {
+                items.draw();
+            }
+
+            // OUTPUT:
+            // drawing this only for square...
+            // drawing this only for rectangle...
+        </pre>
+    </code>
+
+    <hr />
+    <hr />
+
+    <h2>OVERALL DONT USE INHERITANCE FOR SMALL THINGS - IT MAY BRING MAJOR ISSUE</h2>
+    <p>Cons of Inheritance is more - check the explanation video</p>
+    <h2>FOR BETTER CODE REUSABILITY - TRY COMPOSTION INSTEAD OF INHERITANCE</h2>
+
+    <hr />
+    <hr />
+
+    <h2>Mixins [Composition] - Replacement for Inheritance</h2>
+    <p>We just inheriting the common objects to the required Constructor using the Object.assign()</p>
+    <h4>Example: 1 - Implementation of Mixin</h4>
+    <code>
+        <pre>
+            // Define the methods separately where we want to reuse
+            let canEat = {
+                eat: function() {
+                    console.log('Eating...');
+                }
+            }
+            let canWalk = {
+                walk: function() {
+                    console.log('Walking...');
+                }
+            }
+            let canSwim = {
+                swim: function() {
+                    console.log('swimming...');
+                }
+            }
+
+            // If we want to inherit into Object
+            const person = Object.assign({}, canEat);
+
+            //              OR
+
+            // If we want to inherit into Constructor
+            function NewConstruct() {
+            }
+            Object.assign(NewConstruct.prototype, canEat, canWalk);
+
+            let test1 = new NewConstruct();
+            test1.eat();
+            // OUTPUT: Eating...
+        </pre>
+    </code>
+    <h4>Example: 1 - Simplifying the use of Mixin</h4>
+    <code>
+        <pre>
+            // Using function to implement the Mixin
+            function SimpleMixins(target, ...sources) {      // ...sources is a REST operator, which takes n of args ans
+                Object.assign(target, ...sources)       // ...sources is now a SPREAD operator, spreads the Arrays
+            }
+
+            // Define the methods separately where we want to reuse
+            let canEat = {
+                eat: function() {
+                    console.log('Eating...');
+                }
+            }
+            let canWalk = {
+                walk: function() {
+                    console.log('Walking...');
+                }
+            }
+            let canSwim = {
+                swim: function() {
+                    console.log('swimming...');
+                }
+            }
+
+            function NewConstruct() {
+            }
+
+            // If we want to inherit into Constructor
+            SimpleMixins(NewConstruct.prototype, canWalk, canEat);
+
+            let test1 = new NewConstruct();
+            test1.eat();
+            // OUTPUT: Eating...
+        </pre>
+    </code>
+</body>
+<script>
+    // 1. Stopwatch using procedural functions - CONS: involves lot of functions
+    var count = 0;
+    var starting;
+    function start() {
+        starting = setInterval(function() {
+            count = count + 1;
+        }, 1000);
+    }
+    function dur() {
+        console.log(count);
+    }
+    function stop() {
+        clearInterval(starting);
+    }
+    function reset() {
+        clearInterval(starting);
+        count = 0;
+    }
+    // ----------------------------------------
+
+
+    // 2. Stopwatch using Objects
+    function Stopwatch() {
+        let startTime, stopTime, status = false;
+        let duration = 0;
+        this.start = function() {
+            if(!status) {
+                status = true;
+                startTime = new Date();
+            } else {
+                console.log('Stopwatch is already running');
+            }
+        }
+        this.stop = function() {
+            if(status) {
+                status = false;
+                stopTime = new Date();
+                duration = duration + (stopTime.getTime() - startTime.getTime()) / 1000;
+            } else {
+                console.log('Stopwatch is not started');
+            }
+        }
+        this.reset = function() {
+            duration = 0;
+            status = false;
+            startTime = null;
+            stopTime = null;
+        }
+        Object.defineProperty(this, 'duration', {
+            get: function() {
+                return duration;
+            }
+        });
+    }
+    // ----------------------------------------
+
+
+    // 3. Stopwatch using Objects - With Prototype
+    function StopwatchNew() {
+        let startDate, endDate, running = 0;
+        let status = false;
+        Object.defineProperty(this, 'running', {
+            get: function() {
+                return running;
+            },
+            set: function(val) {
+                running = val;
+            }
+        });
+        Object.defineProperty(this, 'startDate', {
+            get: function() {
+                return startDate;
+            }
+        });
+        Object.defineProperty(this, 'endDate', {
+            get: function() {
+                return endDate;
+            }
+        });
+        Object.defineProperty(this, 'status', {
+            get: function() {
+                return status;
+            }
+        });
+    }
+    StopwatchNew.prototype.start = function() {
+        if(!this.status) {
+            this.status = true;
+            this.startDate = new Date();
+        } else {
+            console.log('Stopwatch is still running...')
+        }
+    }
+    StopwatchNew.prototype.end = function() {
+        if(this.status) {
+            this.status = false;
+            this.endDate = new Date();
+            this.running = this.running + (endDate.getTime() - startDate.getTime()) / 1000;
+        } else {
+            console.log('Stopwatch is not yet started');
+        }
+    }
+</script>
+</html>

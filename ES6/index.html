@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="US">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>JavaScript - ES6</title>
+    </head>
+    <body>
+        <h1 style="text-align:center;">JavaScript - ES6 [2015]</h1>
+
+        <h2>Class</h2>
+        <p>Example 1:</p>
+        <code>
+            <pre>
+                class Circle {
+                    constructor(rad) {
+                        // Things listed below will be a Instance Members
+                        this.rad = rad;
+                        this.move = function(){
+                            console.log('moving');
+                        }
+                    }
+                    // Things listed below will be a Prototype Members
+                    draw() {
+                        console.log('drawing...');
+                    }
+                }
+            </pre>
+        </code>
+
+        <hr />
+
+        <h2>Static Method</h2>
+        <p>This method is created inside Class, and can be called ONLY using CLASSNAME, not by Object / Instance</p>
+        <p>Example - 1</p>
+        <code>
+            <pre>
+                Class Square {
+                    constructor(radius) {
+                        this.radius = radius;
+                    }
+
+                    // Static method
+                    static oneCall(x) {
+                        return x;
+                    }
+                }
+                console.log(Square.oneCall('CP'));
+                // OUTPUT: CP
+            </pre>
+        </code>
+
+        <p>Example - 2</p>
+        <code>
+            <pre>
+                Class Circle {
+                    constructor(radius) {
+                        this.radius = radius;
+                    }
+
+                    // Static method
+                    static calcDiameter(x) {
+                        return x.radius * x.radius;
+                    }
+                }
+                let c1 = new Circle(8);
+                let calcRes = Circle.calcDiameter(c1);
+                console.log(calcRes);
+                // OUTPUT: 64
+            </pre>
+        </code>
+
+        <hr />
+        <hr />
+
+        <h2>Abstraction using ES6</h2>
+        <strong>To indicate that property / method is Private, Developers specify using underscore [this._radius]</strong>
+        <h3>Abstraction using Symbols</h3>
+        <p>We use Symbols [This is also a Primitive Data type]</p>
+        <h1>NOT CLEAR, CHECK AGAIN</h1>
+
+        <hr />
+
+        <h3>Abstraction using Weakmaps</h3>
+        <p>This is a key - value pair, where key will be Objects and pair will be anything</p>
+        <h1>NOT CLEAR, CHECK AGAIN</h1>
+
+        <hr />
+        <hr />
+
+        <h2>Inheritance</h2>
+        <strong>Using Inheritance with extend keyword doesn't require to RESET CONSTRUCTOR</strong>
+        <code>
+            <pre>
+                // Parent Class -> Which others inherit the class
+                class Shape {
+                    constructor(color) {
+                        this.color = color;
+                    }
+                }
+
+                class Circle extends Shape {
+                    constructor(color, radius) {
+                        // If we didnt call the Parent Constructor when inheriting, will give Error. So,
+                        super(color);   // This will call parent class & passes arguments also
+                        this.radius = radius;
+                    }
+                    
+                    draw() {
+                        console.log('Drawing...');
+                    }
+                }
+
+                let c1 = new Circle('Blue', 2);
+                // OUTPUT:  { color: "Blue", radius: 2 }
+            </pre>
+        </code>
+
+        <hr />
+
+        <h2>Method Overriding using ES6</h2>
+        <code>
+            <pre>
+                class Animal {
+                    eat() {
+                        console.log('Eating');
+                    }
+                }
+
+                class Carn extends Animal {
+                    eat() {
+                        // If we want to implement the parent class eat(), then call using 
+                        // super.eat();
+                        console.log('Eating 2');
+                    }
+                }
+
+                let ccc = new Carn();
+                ccc.eat();
+                // OUTPUT: Eating 2
+            </pre>
+        </code>
+
+        <hr />
+        <hr />
+
+        <h2>ES6 - Modules</h2>
+        <p>Splitting in Modules helps in orgainizing, reusing, and applying Abstraction techniques for hiding.</p>
+        <h4>In ES5, there is no native modules like currently we have ES6, So developers followed different modules,</h4>
+        <ul>
+            <li>AMD</li>
+            <li>CommonJS</li>
+            <li>Native Module</li>
+            <li>UMD</li>
+        </ul>
+        <p>We are focusing only on two things, CommonJS & Native Module</p>
+
+        <hr />
+
+        <h4>CommonJS - ONLY FOR NODE.JS</h4>
+        <p>It uses module.exports & require()</p>
+        <code>
+            <pre>
+                // ---------------------- New file - Test.js -----------------------
+                class Animal {
+                    eat() {
+                        console.log('Eating');
+                    }
+                }
+
+                class Carn extends Animal {
+                    eat() {
+                        // If we want to implement the parent class eat(), then call using 
+                        // super.eat();
+                        console.log('Eating 2');
+                    }
+                }
+
+                // If we want to export more than one Object, then do like,
+                module.exports.Animal = Carn;
+                module.exports.TestPurpose = TestPurpose;
+
+                // If we have only one Object to export
+                module.exports = Carn;
+                // ------------------------------ End ---------------------------------
+
+                // ----------------------- Main File - index.js -----------------------
+                const Carn = require('./Test.js');
+                let ccc = new Carn();
+                ccc.eat();
+                // ------------------------------ End ---------------------------------
+            </pre>
+        </code>
+
+        <hr />
+
+        <h4>ES6 Modules</h4>
+        <p></p>
+        <code>
+            <pre>
+                // ---------------------- New file - Test.js -----------------------
+                class Animal {
+                    eat() {
+                        console.log('Eating');
+                    }
+                }
+
+                export class Carn extends Animal {
+                    eat() {
+                        // If we want to implement the parent class eat(), then call using 
+                        // super.eat();
+                        console.log('Eating 2');
+                    }
+                }
+                // ------------------------------ End ---------------------------------
+
+                // ----------------------- Main File - index.js -----------------------
+                import {Carn} from './Test.js';     // This gives an Error for {}. then, Go to index.html and on the line
+                                                    // where this index.js is added, add the sentence type="module" like below
+                                                    <!-- <script src="index.js" type="module"></script> -->
+                let ccc = new Carn();
+                ccc.eat();
+                // ------------------------------ End ---------------------------------
+            </pre>
+        </code>
+    </body>
+</html>
